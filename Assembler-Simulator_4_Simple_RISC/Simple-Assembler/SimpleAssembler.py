@@ -80,9 +80,9 @@ def checkerror(x):
             elif x[i][0][0] in vt and x[i][0][2] not in var_store:
                 print("undefined variable")
                 exit()
-            elif x[0][1]!='FLAGS':
-                print("Illegal memory address at line "+str(x[1]))
-                exit()
+            # elif x[0][1]!='FLAGS':
+            #     print("Illegal memory address at line "+str(x[1]))
+            #     exit()
 
     def reg_number(x):
         all_reg = ["R0","R1","R2","R3","R4","R5","R6"]
@@ -184,7 +184,7 @@ def checkerror(x):
     halt_present(x)
     label_var(x)
     typos(x)
-    reg_number(x)
+    #reg_number(x)
     reg_only(x)
         
 
