@@ -42,7 +42,7 @@ output = []
 def checkerror(x):
     def halt_present(x):
         if len(x)<256 and x[len(x)-1][0][0]!="hlt":
-            print("Halt not present.")
+            print("Halt not present at last")
             exit()
 
 
@@ -80,15 +80,113 @@ def checkerror(x):
             elif x[i][0][0] in vt and x[i][0][2] not in var_store:
                 print("undefined variable")
                 exit()
+            elif x[0][1]!='FLAGS':
+                print("Illegal memory address at line "+str(x[1]))
+                exit()
+
+    def reg_number(x):
+        all_reg = ["R0","R1","R2","R3","R4","R5","R6"]
+        for i in x.keys():
+            if x[i][0][0] not in all_reg:
+                print("Only registers allowed")
+                exit()
+
+    def reg_only(x):
+        reserved = ["add","sub","mul","div","cmp","R0","R1","R2","R3","R4","R5","R6","not","xor","or","and","mov","hlt"]
+        for i in x.keys():
+            if x[i][0][0] not in reserved:
+                print("Only registers are allowed h")
+                exit()
+
+
+
+    def checkA(x):
+            if(len(x[0])!=4):
+                print("wrong instruction at line"+str(x[1]))
+                exit()
+            elif(x[0][1]=="FLAGS"):
+                print("Illegal use of flags at line "+str(x[1]))
+                exit()
+            elif(x[0][1] not in reg.keys() or x[0][2] not in reg.keys() or x[0][3] not in reg.keys() ):
+                print("Typo in instruction at line "+str(x[1]))
+                exit()
+    def checkm(x):
+        if(len(x[0]!=3)):
+            print("Wrong Syntax at line "+str(x[1]))
+            exit()
+        elif(x[0][1]=='FLAGS'):
+            print("illegal use of flags "+str(x[1]))
+            exit()
+        elif(x[0][2][0:1]=='R'):
+            if(x[0][2] not in reg.keys()):
+                print("Invalid register name at line "+str(x[1]))
+                exit()
+        elif(x[0][2][0:1]=='$'):
+            if (int(x[0][2][1:],10)<0 and int(x[0][2][1:],10)>255):
+                print("Invalid immidiete in line "+str(x[1]))
+                exit()
+    def checkBlr(x):
+        if(len(x[0]!=3)):
+            print("Wrong Syntax at line "+str(x[1]))
+            exit()
+        elif(x[0][1]=='FLAGS' or x[0][2]=='FLAGS'):
+            print("illegal use of flags register at line"+str(x[1]))
+            exit()
+        elif(x[0][1] not in reg.keys()):
+            print(" Typographical error in line "+str(x[1]))
+            exit()
+    def checkD(x):
+        if(x[0]!=3):
+            print("wrong syntax at line "+str(x[1]))
+            exit()
+        elif x[0][1] not in reg.keys():
+            print('typographical error at line '+str(x[1]))
+            exit()
+        elif x[0][0]=='ld' and x[0][1]=='FLAGS':
+            print("Illegal use of flag register at line "+str(x[1]))
+            exit()
+        elif x[0][2] not in var_store.keys():
+            print("Undefined variables at line "+str(x[1]))
+            exit()
+    def checkC(x):
+        if len(x[0])!=3:
+            print("Invalid syntax at line "+str(x[1]))
+            exit()
+        if x[0][0]=='not' and x[0][1]=='FLAGS':
+            print("illegal use of flag register "+str(x[1]))
+            exit()
+        elif( x[0][2] not in reg.keys() or x[0][1] not in reg.keys()):
+            print("typograhical error at line "+str(x[1]))
+            exit()
+    ta=['add','sub','mul','xor','or','and']
+    tc=['div','not','cmp']
+    tlr=['ls','rs']
+
+    for i in x.keys():
+        if(x[i][0][0] in ta):
+            checkA(x[i])
+        elif(x[i][0][0]=='ld' or x[i][0][0]=='st'):
+            checkD(x[i])
+        elif(x[i][0][0]=='mov'):
+            checkm(x[i])
+        elif(x[i][0][0] in tc):
+            checkC(x[i])
+        elif(x[i][0][0] in tlr):
+            checkBlr(x[i])
+    
+        
+
+
+            
+
 
     halt_count(x)
     halt_present(x)
     label_var(x)
     typos(x)
-
-
+    reg_number(x)
+    reg_only(x)
         
-
 
 
 
