@@ -185,7 +185,7 @@ def checkerror(x):
     label_var(x)
     typos(x)
     #reg_number(x)
-    reg_only(x)
+    #reg_only(x)
         
 
 
