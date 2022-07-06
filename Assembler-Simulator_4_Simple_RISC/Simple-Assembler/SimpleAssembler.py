@@ -62,12 +62,13 @@ def checkerror(x):
         else:
             print("Correct")
 
-    reserved = ["add","sub","mul","div","jmp","jgt","jlt","je","cpm","ld","R0","R1","R2","R3","R4","R5","R6","FLAGS","var","st","not","xor","or","and","ls","rs","mov","hlt"]
+    reserved = ["add","sub","mul","div","jmp","jgt","jlt","je","cmp","ld","R0","R1","R2","R3","R4","R5","R6","FLAGS","var","st","not","xor","or","and","ls","rs","mov","hlt"]
 
     def typos(x):
         for i in x.keys():
             if x[i][0][0] not in reserved:
-                print("Typographic error")
+                print(x[i][0][0])
+                print("Typographic error at line "+str(x[i][1]))
                 exit()
     def label_var(x):
         st=['jgt','jlt','jmp','je']
@@ -194,7 +195,7 @@ def not_op(x):
     return n
 
 def compare(x):
-    cp = "11110000"
+    cp = "1111000000"
     cp = cp+ reg[x[1]]
     cp = cp + reg[x[2]]
     return cp
