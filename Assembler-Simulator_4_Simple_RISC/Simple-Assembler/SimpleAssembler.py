@@ -31,7 +31,7 @@ reg = {'R0':'000',
        'R6':'110',
        'FLAGS':'111'}
 
-reserved = ["add","sub","mul","div","jmp","jgt","jlt","je","cpm","ld","R0","R1","R2","R3","R4","R5","R6","FLAGS","var","st","not","xor","or","and","ls","rs","mov","hlt"]
+reserved = ["add","sub","mul","div","jmp","jgt","jlt","je","cmp","ld","R0","R1","R2","R3","R4","R5","R6","FLAGS","var","st","not","xor","or","and","ls","rs","mov","hlt"]
 
 #var_name = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_abcdefghijklmnopqrstuvwxyz"
 
