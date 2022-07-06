@@ -111,8 +111,8 @@ def checkerror(x):
                 print("Typo in instruction at line "+str(x[1]))
                 exit()
     def checkm(x):
-        if(len(x[0]!=3)):
-            print("Wrong Syntax at line "+str(x[1]))
+        if len(x[0])!=3:
+            print("Wrong Syntax a this line "+str(x[1]))
             exit()
         elif(x[0][1]=='FLAGS'):
             print("illegal use of flags "+str(x[1]))
