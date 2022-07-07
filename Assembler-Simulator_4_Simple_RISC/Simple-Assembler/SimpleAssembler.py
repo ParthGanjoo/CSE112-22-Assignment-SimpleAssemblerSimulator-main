@@ -123,7 +123,7 @@ def checkerror(x):
                 exit()
         elif(x[0][2][0:1]=='$'):
             if (int(x[0][2][1:],10)<0 and int(x[0][2][1:],10)>255):
-                print("Invalid immidiete in line "+str(x[1]))
+                print("Invalid immediate in line "+str(x[1]))
                 exit()
     def checkBlr(x):
         if(len(x[0]!=3)):
@@ -175,6 +175,7 @@ def checkerror(x):
             checkBlr(x[i])
     
         
+
 
 
             
