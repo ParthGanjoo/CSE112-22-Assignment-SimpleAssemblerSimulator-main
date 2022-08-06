@@ -42,17 +42,21 @@ output = []
 def checkerror(x):
     def halt_present(x):
         if len(x)<256 and x[len(x)-1][0][0]!="hlt":
-            print("Halt not present at last")
+            print("Halt not present at last at line "+str(x[i][1]))
             exit()
 
 
     def halt_count(x):
         c=0
+        l=[]
         for i in x.keys():
             if(x[i][0][0]=='hlt'):
                 c+=1
+                l.append(x[i][1])
         if(c>1):
-            print("more than one hlt present")
+            print("more than one hlt present at line number",end=" " )
+            for a in l:
+                print(a+" ",end="")
             exit()
         
     def variable_not_assigned(x):
@@ -114,7 +118,7 @@ def checkerror(x):
         if len(x[0])!=3:
             print("Wrong Syntax a this line "+str(x[1]))
             exit()
-        elif(x[0][1]=='FLAGS'):
+        elif(x[0][2]=='FLAGS'):
             print("illegal use of flags "+str(x[1]))
             exit()
         elif(x[0][2][0:1]=='R'):
@@ -123,7 +127,7 @@ def checkerror(x):
                 exit()
         elif(x[0][2][0:1]=='$'):
             if (int(x[0][2][1:],10)<0 and int(x[0][2][1:],10)>255):
-                print("Invalid immediate in line "+str(x[1]))
+                print("Invalid immidiete in line "+str(x[1]))
                 exit()
     def checkBlr(x):
         if(len(x[0]!=3)):
@@ -136,7 +140,7 @@ def checkerror(x):
             print(" Typographical error in line "+str(x[1]))
             exit()
     def checkD(x):
-        if(x[0]!=3):
+        if(len(x[0])!=3):
             print("wrong syntax at line "+str(x[1]))
             exit()
         elif x[0][1] not in reg.keys():
@@ -166,6 +170,7 @@ def checkerror(x):
         if(x[i][0][0] in ta):
             checkA(x[i])
         elif(x[i][0][0]=='ld' or x[i][0][0]=='st'):
+            #print(x[i])
             checkD(x[i])
         elif(x[i][0][0]=='mov'):
             checkm(x[i])
@@ -175,7 +180,6 @@ def checkerror(x):
             checkBlr(x[i])
     
         
-
 
 
             
